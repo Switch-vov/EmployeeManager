@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.pc.domain">
+	<class name="Department" table="department">
+		<!-- 主键生成策略 -->
+		<id name="id" type="java.lang.Integer">
+			<generator class="native" />
+		</id>
+		<!-- 部门名称 -->
+		<property name="name" type="java.lang.String">
+			<column name="name" length="32" not-null="true" />
+		</property>
+		<!-- 员工集合 -->
+		<set name="emps">
+			<key column="department_id" />
+			<one-to-many class="com.pc.domain.Employee" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

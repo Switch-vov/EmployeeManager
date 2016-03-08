@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<!-- 配置登录action表单 -->
+		<form-bean name="employeeForm" type="com.pc.web.forms.EmployeeForm" />
+	</form-beans>
+	
+	<!-- 配置全局跳转 -->
+	<global-forwards>
+		<forward name="opererr" path="/WEB-INF/err.jsp"></forward>
+		<forward name="operok" path="/WEB-INF/ok.jsp"></forward>
+	</global-forwards>
+	
+	<action-mappings>
+		<!-- 配置登录action -->
+		<action path="/login" name="employeeForm" scope="request"
+			parameter="type">
+			<forward name="ok" path="/WEB-INF/mainFrame.jsp" />
+			<forward name="error" path="/WEB-INF/login.jsp" />
+		</action>
+		
+		<!-- 配置雇员Action -->
+		<action path="/employee" name="employeeForm" scope="request" parameter="type">
+			<forward name="goToAddEmployeeUI" path="/WEB-INF/addEmployeeUI.jsp" />
+			<forward name="goToShowEmployeeUI" path="/WEB-INF/showEmployeeUI.jsp" />
+			<forward name="goToUpdateEmployeeUI" path="/WEB-INF/updateEmployeeUI.jsp" />
+		</action>
+	</action-mappings>
+
+	
+
+	<!-- 配置代理请求处理DelegatingRequestProcessor，用处是 -->
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+</struts-config>
